@@ -1,0 +1,14 @@
+Ejercicio B: Responda y justifique las siguientes preguntas:
+1. ¿Las filas de una relación tienen un orden específico? Compare con una tabla.
+2. ¿Puede una relación carecer de clave primaria?
+3. ¿Puede una relación carecer de clave foránea?
+4. ¿Una clave foránea puede contener valores nulos?
+5. Enuncie la Propiedad de Clausura, e indique las consecuencias que de ella se desprenden.
+
+1) 
+2) No.
+3) Si.
+4) No, ya que referencian una clave primaria en la otra tabla.
+5) "Ninguna expresión del álgebra puede generar tuplas repetidas"
+Una de las consecuencias de repetirse tuplas es que la clave primaria perdería su valor, ya que ésta sirve para identificar cada fila de la relación, por ende
+al obtener datos de la relación, podriamos tener información erronea o incompleta.
