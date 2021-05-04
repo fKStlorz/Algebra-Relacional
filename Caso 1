@@ -13,4 +13,12 @@
 -- correspondiente.
 -- π Nom, Nomd, Nomc (((PERS ⨝ PERS.Dni = PRAC.Dni PRAC) ⨝ PRAC.Codc = CLUB.Codc CLUB) ⨝ DEPO.Codd = PRAC.Codd DEPO)
 -- 7) Nombre de las personas que practican (simultáneamente) los deportes D01, D22 y D10 (códigos).
-π Nom (π Nom, Codd (PERS ⨝ PRAC) ÷ π Codd (σ Codd = 'D01' or Codd = 'D22' or Codd = 'D10' DEPO))
+-- π Nom (π Nom, Codd (PERS ⨝ PRAC) ÷ π Codd (σ Codd = 'D01' or Codd = 'D22' or Codd = 'D10' DEPO))
+-- 8) Nombre de las personas que no practican deportes en Ausonia
+-- π Dni ,Nom ((PERS ⨝ PRAC) ⨝ (PRAC ⨝ CLUB.Nomc ≠ 'Ausonia' CLUB))
+-- 9) DNI de las personas que practican deportes en Ausonia o bien practican en la UVT.
+-- π Dni (PRAC ⨝ (CLUB.Nomc = 'Ausonia' and PRAC.Codc = 100) or (CLUB.Nomc = 'UVT' and PRAC.Codc = 600) CLUB)
+-- 10)  Código de los deportes que son practicados solamente por hombres.
+-- π Codd (PRAC - (π PRAC.Dni, Codd, Codc (PRAC ⨝ PERS.Sexo = 'F' PERS)))
+-- π Codd (PRAC - (π PRAC.Dni, Codd, Codc (PRAC ⨝ (σ Sexo = 'F' PERS))))
+-- PRAC - π PRAC.Dni, Codd, Codc (PRAC ⨝ (σ Sexo = 'F' PERS))
