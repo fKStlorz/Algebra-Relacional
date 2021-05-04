@@ -1,0 +1,3 @@
+Ejercicio A: Defina clave primaria y foránea.
+Clave primaria: Es un atributo o combinación de atributos que identifica de forma uniequivoca a cada fila de la tabla relación
+Clave foránea: Es una forma de referencia entre dos tablas, en las cuales las columnas de la tabla referendo deben ser clave primaria en la otra tabla (la referenciada).
