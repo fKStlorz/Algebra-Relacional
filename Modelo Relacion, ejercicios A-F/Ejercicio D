@@ -1,0 +1,5 @@
+Considere las relaciones (tablas) X y Z.
+X:    P Q R       Z: A B C
+     10 a 5         10 b 6
+     15 b 8         25 c 3
+     25 a 6         10 b 5
