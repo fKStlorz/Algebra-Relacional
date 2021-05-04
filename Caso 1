@@ -1,0 +1,16 @@
+-- Caso 1
+-- 1)
+-- π Nom, Dir, Zona (PERS)
+-- 2)
+-- π Nomc, Zona (σ Zona = 'Capital' or Zona = 'Desamparados' or Zona = 'Rivadavia' (CLUB)) 
+-- 3)
+-- π Nom, Sexo, Edad (PERS ⨝ PRAC)
+-- 4)
+-- π Dni (σ Nomd = 'Tenis' (PRAC ⨝ DEPO))
+-- 5) Nombre de los clubes donde se practica fútbol.
+-- π Nomc (σ Nomd = 'Fútbol' ((CLUB ⨝ PRAC) ⨝ DEPO))
+-- 6)Para todas las personas que practican deportes: nombre de la -- persona, nombre del deporte y el nombre del club
+-- correspondiente.
+-- π Nom, Nomd, Nomc (((PERS ⨝ PERS.Dni = PRAC.Dni PRAC) ⨝ PRAC.Codc = CLUB.Codc CLUB) ⨝ DEPO.Codd = PRAC.Codd DEPO)
+-- 7) Nombre de las personas que practican (simultáneamente) los deportes D01, D22 y D10 (códigos).
+π Nom (π Nom, Codd (PERS ⨝ PRAC) ÷ π Codd (σ Codd = 'D01' or Codd = 'D22' or Codd = 'D10' DEPO))
