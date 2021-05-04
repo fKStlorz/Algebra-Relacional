@@ -1,0 +1,15 @@
+Ejercicio C:
+1. Especifique una relación que posea al menos una clave foránea (que no forme parte de la clave primaria de dicha
+relación), especifique la relación a la que hace referencia, identifique su clave primaria. La clave foránea, ¿puede
+contener nulos?
+2. Especifique una relación que posea una clave foránea que forme parte de la clave primaria. Especifique la relación
+a la que hace referencia, identifique su clave primaria. La clave foránea, ¿puede contener nulos? Justifique
+
+1) Laboratorio = {id, nombre, raza, color, dniDirector}  CP: id   CF:dniDueño
+dniDirector sería la clave foránea de la relacion Laboratorio, en la que referenciaría a la relacion Persona con su respectivo dni (siendo éste su clave primaria).
+La clave foránea no puede contener nulos.
+
+2) Ejemplo: multivaluado de patologias de una persona
+Patologias = {dni, pais, patologia}   CP: dni+pais   CF: dni+pais
+La clave primaria ( y a la vez clave foránea ) seria dni+pais, la cual referenciaria a una relacion Persona con su respectivo dni y pais.
+No puede contener nulos la clave foránea.
