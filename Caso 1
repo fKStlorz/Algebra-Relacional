@@ -22,3 +22,18 @@
 -- π Codd (PRAC - (π PRAC.Dni, Codd, Codc (PRAC ⨝ PERS.Sexo = 'F' PERS)))
 -- π Codd (PRAC - (π PRAC.Dni, Codd, Codc (PRAC ⨝ (σ Sexo = 'F' PERS))))
 -- PRAC - π PRAC.Dni, Codd, Codc (PRAC ⨝ (σ Sexo = 'F' PERS))
+-- 11) Nombre y dirección de las personas que viven en la misma zona que Juan Pérez, DNI 20.498.425.
+-- a = π Zona (σ Dni=20498425 PERS)
+-- π Nom, Dir (σ Dni≠20498425 (PERS ÷ a))
+
+-- 12) Nombre de las personas mayores que Ana García (DNI: 18.498.425)
+-- a = π Edad (σ Dni=18498425 PERS)
+
+-- 13) Nombre de las personas que practican en clubes que están ubicados en la misma zona en la que ellos viven
+
+-- 14) Nombre de las personas junto al nombre del deporte que práctica. Se deben incluir todas las personas registradas
+-- más allá que no estén practicando algún deporte
+-- π Nom, Nomd ((PERS ⟕ PRAC)⟕DEPO)
+-- 15) Nombre de los deportes practicados en todos los clubes
+-- π Nomd, Nomc ((PRAC ⨝ DEPO) ⨝ CLUB)
+-- 16) Clubes (todos sus datos) en los que se practican todos los deportes de balón (clase).
