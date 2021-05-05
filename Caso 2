@@ -1,0 +1,21 @@
+-- 1)  Alumnos (todos los datos) que nunca tuvieron aplazos.
+-- APLA =ρAPLA (π nomAlu, dni σ exa.nota < 4 (alu ⨝ exa))
+-- π nomAlu, dni alu - APLA
+-- 2) Alumnos (nombre) que han rendido (aprobado) Bases de Datos y Bases de Datos Avanzadas.
+-- π nomAlu (σ (mat.nomM='Base de Datos' and exa.nota≥4) or (mat.nomM='Base de Datos Avanzadas' and exa.nota≥4) ((alu⨝exa) ⨝ (exa⨝mat)))
+-- 3) Materias (todos los datos) que tienen algún inscripto en el presente año.
+-- π codM ,nomM, anio, despliegue ((σ year(insc.fecha) = 2020 insc) ⨝ mat)
+-- 4) Exámenes (nombre del alumno, nombre de la materia, fecha y nota) rendidos en forma regular.
+-- π nomAlu, nomM, fecha, nota (alu ⨝ exa ⨝ mat)
+-- 5) Alumnos (dni y nombre) que han sacado boleta de todas las materias de primer y segundo año
+-- materias = ρmaterias (π codM σ anio = 1 or anio = 2 mat)
+-- π nomAlu, dni ((π dni, codM bol ÷ materias) ⨝ alu)
+-- 6) Alumnos (dni y nombre) que están inscriptos en materias de distintos años.
+-- 7) Alumnos (todos sus datos personales) que están en condiciones de rendir Bases de Datos; es decir, tener rendidas
+-- sus correlativas además de haber obtenido la boleta.
+-- 8)Alumnos que han rendido más de una vez mal la misma materia
+-- ma = ρma (σ nota<4 exa)
+-- π exa.dni (exa ⨝ exa.dni=ma.dni and exa.codM=ma.codM and exa.fecha≠ma.fecha and exa.nota<4 ma)
+-- 10)  Nombre de materias y sus correlativas (nombre también).
+a = ρa (nomMM←nomM(mat))
+-- π nomM
