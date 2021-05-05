@@ -1,0 +1,13 @@
+-- Caso 3
+-- 1) Empleados (nombre y apellido) junto a su salario (salary)
+-- π nome, ap, salario emp
+-- 2)  Renombre el nombre de la columna Nome a Nombre, Ap a Apellido y salario a Sueldo.
+-- ρ(code, nombre, apellido, email, tel, fecha_nac, codt, sueldo, comision, manager_id, codd) emp
+-- ρ nombre←nome (emp)
+
+
+-- 3) Nombre de los empleados junto al nombre del departamento donde trabajan.
+-- π nome, nom (emp ⨝ dep)
+-- 4) Nombre de los empleados que trabajan en los departamentos de Finanzas (Finance) o Transporte (Shipping).
+-- π nome,nom ((emp) ⨝ (σ dep.nom='Finance' or dep.nom='Shipping' dep))
+-- 5) Trabajos (nombre) donde sus empleados cobran únicamente sueldos superiores a 5000.
