@@ -27,9 +27,11 @@
 -- π Nom, Dir (σ Dni≠20498425 (PERS ÷ a))
 
 -- 12) Nombre de las personas mayores que Ana García (DNI: 18.498.425)
--- a = π Edad (σ Dni=18498425 PERS)
+-- a = ρ a (π Edad (σ Dni=18498425 PERS))
+-- π Nom (a ⨝ a.Edad<PERS.Edad PERS)
 
 -- 13) Nombre de las personas que practican en clubes que están ubicados en la misma zona en la que ellos viven
+-- π Nom ((PERS ⨝ PRAC) ⨝ PERS.Zona=CLUB.Zona CLUB)
 
 -- 14) Nombre de las personas junto al nombre del deporte que práctica. Se deben incluir todas las personas registradas
 -- más allá que no estén practicando algún deporte
