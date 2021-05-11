@@ -1,0 +1,18 @@
+-- 1) Leyes (todos sus datos) aprobadas en el año 2000, a la que adhirieron las 3 provincias de Cuyo (San Juan, San Luis y
+-- Mendoza)
+-- a = ρa (σ year(fecha)=2000 LEY)
+-- ad = ρad (π num, nomp (Adhiere))
+-- dividendo = ρdividendo (a ⨝ ad)
+-- (dividendo ÷ (π nomp (Prov)))
+-- 2) Leyes (número, nombre) que fueron votadas afirmativamente sólo por representantes de “Cambiemos”
+-- dip = ρdip (π LEY.num, LEY.nombre ((VotosD⨝ VotosD.dni=DIP.dni DIP)⨝ DIP.partido='Cambiemos' and VotosD.voto='SI' LEY))
+-- sen = ρsen (π LEY.num, LEY.nombre ((VotosS⨝ VotosS.dni=SEN.dni SEN)⨝ SEN.partido='Cambiemos' and VotosS.voto='SI' LEY))
+-- sen ∪ dip
+-- 3) Provincias (nombre) que han adherido a más de una ley durante el 2018.
+-- adh = ρadh (Adhiere)
+-- π Adhiere.nomp (σ Adhiere.fecha≠adh.fecha and Adhiere.nomp=adh.nomp (Adhiere ⨯ adh))
+-- 4) Dni y nombre de todos los representantes de la provincia de San Juan, incluyendo diputados y senadores.
+-- dip = ρdip (π dni, nombre (σ prov='San Juan' DIP))
+-- sen = ρsen (π dni, nombre (σ prov='San Juan' SEN))
+-- dip∪sen
+-- 5) Leyes (número, nombre y cantidad de artículos) a las que adhirieron todas las provincias.
