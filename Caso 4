@@ -20,5 +20,4 @@
 -- diputado del mismo partido político que el diputado que la propuso.
 dipu = ρdipu (VotosD)
 mp = ρmp (DIP)
-propuso = ρpropuso (π dni,num,nombre LEY)
-(σ VotosD.voto='SI' (σ VotosD.voto≠dipu.voto and VotosD.num=dipu.num (VotosD ⨯ dipu)) ⨝ (VotosD.dni=DIP.dni and dipu.dni=mp.dni) π DIP.dni,DIP.nombre,mp.dni,mp.nombre σ DIP.partido=mp.partido and DIP.dni≠mp.dni (DIP ⨯ mp)) ⨝ propuso
+σ VotosD.voto='SI' (σ VotosD.voto≠dipu.voto and VotosD.num=dipu.num (VotosD ⨯ dipu)) ⨝ (VotosD.dni=DIP.dni and dipu.dni=mp.dni) π DIP.dni,DIP.nombre,mp.dni,mp.nombre σ DIP.partido=mp.partido and DIP.dni≠mp.dni (DIP ⨯ mp)
