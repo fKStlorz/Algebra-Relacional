@@ -16,3 +16,9 @@
 -- sen = ρsen (π dni, nombre (σ prov='San Juan' SEN))
 -- dip∪sen
 -- 5) Leyes (número, nombre y cantidad de artículos) a las que adhirieron todas las provincias.
+-- 6) Leyes (número, nombre de la ley y nombre y apellido del diputado que la propuso) que han sido rechazadas por algún
+-- diputado del mismo partido político que el diputado que la propuso.
+dipu = ρdipu (VotosD)
+mp = ρmp (DIP)
+propuso = ρpropuso (π dni,num,nombre LEY)
+(σ VotosD.voto='SI' (σ VotosD.voto≠dipu.voto and VotosD.num=dipu.num (VotosD ⨯ dipu)) ⨝ (VotosD.dni=DIP.dni and dipu.dni=mp.dni) π DIP.dni,DIP.nombre,mp.dni,mp.nombre σ DIP.partido=mp.partido and DIP.dni≠mp.dni (DIP ⨯ mp)) ⨝ propuso
