@@ -2,16 +2,15 @@
 -- 1) Empleados (nombre y apellido) junto a su salario (salary)
 -- π nome, ap, salario emp
 -- 2)  Renombre el nombre de la columna Nome a Nombre, Ap a Apellido y salario a Sueldo.
--- ρ(code, nombre, apellido, email, tel, fecha_nac, codt, sueldo, comision, manager_id, codd) emp
--- ρ nombre←nome (emp)
-
-
+-- ρ nombre ← nome, apellido ← ap, sueldo ← salario (emp)
 -- 3) Nombre de los empleados junto al nombre del departamento donde trabajan.
 -- π nome, nom (emp ⨝ dep)
 -- 4) Nombre de los empleados que trabajan en los departamentos de Finanzas (Finance) o Transporte (Shipping).
 -- π nome,nom ((emp) ⨝ (σ dep.nom='Finance' or dep.nom='Shipping' dep))
 -- 5) Trabajos (nombre) donde sus empleados cobran únicamente sueldos superiores a 5000.
--- π nomt (σ salmin≥5000 trabajo)
+-- X = π codt σ salario < 5000 emp
+-- Y = (π codt emp) - X
+-- π nomt (Y ⨝ trabajo)
 -- 6) Empleados que han trabajado (Historia) en el departamento 90 y 60.
 -- codse = ρcodse (πcode σ codd=60 historia)
 -- codno = ρcodno (πcode σ codd=90 historia)
@@ -23,12 +22,16 @@
 -- tobias = ρtobias (π salario (σ code=117 emp))
 -- π code, nome (σ code≠117 emp⨝ salario>tobias.salario tobias)
 -- 9) Puestos (código y nombre) ocupados (actualmente o en sus puestos anteriores) por el empleado con código 101.
-
+-- E = π codt, code (historia) ⨝ π code (σ code=101 emp)
+-- π codt, nomt (trabajo⨝E)
 -- 10) Nombre del empleado junto al nombre del trabajo que realiza. Se deben incluir todos los empleados aun cuando sean
 -- empleados recién contratados (no se los haya asignado aún a ningún departamento o trabajo).
 -- π nome, nomt (emp⨝trabajo)
 -- 11) Nombre de los trabajos realizados en todos los departamentos.
--- π nomt, nom ((trabajo⨝emp)⨝dep)
+-- π codt,codd emp ÷ π codd dep
+-- trabajos = ρtrabajos (πcodt, codd emp ∪ πcodt,codd historia)
+-- dpto = ρdpto (πcodd dep)
+-- trabajos ÷ dpto
 -- 12) Trabajos (todos sus datos) que se realizan en todos los departamentos ubicados en Toronto (ciudad).
--- toro = ρtoro (π localidad_id (σ ciudad='Toronto' localidad))
--- π codt, nomt, salmin, salmax ((trabajo⨝emp)⨝(dep⨝toro))
+div = πcodd (σ ciudad='Toronto' localidad⨝dep)
+(πcodt,codd emp ÷ div)⨝ trabajo
