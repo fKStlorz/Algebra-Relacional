@@ -1,0 +1,17 @@
+-- 1) Sucursales (todos los datos) que vendieron todos los productos que se comercializan en San Luis.
+-- σ provincia='San Luis' Sucursal
+-- 2) Provincias donde se venden más de un producto
+-- prod = ρprod (Producto)
+-- πprovincia ((πprod.num σ prod.num=Producto.num and prod.cod≠Producto.cod (prod ⨯ Producto)) ⨝ Sucursal)
+-- 3) Sucursales (todos los datos) que venden tanto Pizza napolitana como Pizza napolitana especial.
+-- prod = ρprod (Producto)
+-- (π prod.num (prod ⨝ prod.num=Producto.num and prod.nombre='Pizza napolitana' and Producto.nombre='Pizza napolitana especial' Producto)) ⨝ Sucursal
+-- 4) Productos (nombre y stock) comercializados en las provincias de Cuyo (San Juan, Mendoza y San Luis).
+-- 5) Provincias que no venden Pizza muzzarella.
+-- venden = ρvenden (π provincia (Sucursal⨝(σ nombre='Pizza muzzarella' Producto)))
+-- (π provincia (Sucursal⨝Producto)) - venden
+-- 6) Sucursales que no venden el producto ‘Pizza con jamón’
+-- venden = ρvenden (πnum (Sucursal⨝(σ nombre='Pizza con jamón' Producto)))
+-- (π num (Sucursal⨝Producto)) - venden
+-- 7) Nombre de productos vendidos por todas las sucursales de San Juan.
+-- πnombre (σprovincia='San Juan' (Producto ⨝ Sucursal))
