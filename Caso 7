@@ -1,0 +1,11 @@
+-- 1) Planetas (nombre, cantidad de años luz) descubiertos únicamente por la Universidad de Texas (es decir, todos los
+-- descubridores pertenecen a esa universidad).
+-- nb = ρnb (πnomas σuni≠'Universidad de Texas' As)
+-- πnomp, cantal ((πnomp D - (πnomp (D⨝nb)))⨝Pla)
+-- 2) Astrónomos (nombre y universidad) que han descubierto planetas y/o satélites durante el período 1950-2016.
+-- pl = ρsa σ year(fechadesc)≥1950 and year(fechadesc)≤2016 Pla
+-- sa = πnomas ρsa σ year(fechadesc)≥1950 and year(fechadesc)≤2016 S
+-- πnomas,uni ((πnomas (D⨝pl) ∪ sa)⨝As)
+-- 3) Planetas (nombre, cantidad de años luz) junto al/a los Astrónomo/s (nombre) que lo descubrieron.
+-- πnomp, cantal, nomas (D⨝Pla)
+-- 4) Astrónomos de la universidad de Antioquía que descubrieron tanto planetas como satélites.
