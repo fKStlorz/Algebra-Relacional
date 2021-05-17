@@ -1,0 +1,23 @@
+-- 1) Personas (nombre) que han actuado en más de una película estrenada en el año 1990.
+-- a = ρa ((Actua⨝Pelicula)⨝Persona)
+-- πa.nom (σActua.nom=a.nom and year(Pelicula.estreno)=1990 and year(a.estreno)=1990 and Actua.titulo≠a.titulo (((Actua⨝Pelicula)⨝Persona) ⨯ a))
+-- 2) Personas (nombre) que han actuado en todas las películas en las que actuó Keanu Reeves.
+-- pelis = ρpelis (πtitulo (σnom='Keanu Reeves' Actua))
+-- σnom≠'Keanu Reeves' (Actua ÷ pelis)
+-- 3) Personas (todos los datos) que han actuado en todas las películas dirigidas por Carrie-Anne Moss.
+-- carrie = ρcarrie (πtitulo σnom='Carrie-Anne Moss' Dirige)
+-- (Actua ÷ carrie)⨝Persona
+-- 4) Obtener el título y fecha de estreno de las películas dirigidas por Keanu Reeves.
+-- k = ρk (πtitulo σnom='Keanu Reeves' Dirige)
+-- πtitulo, estreno (Pelicula⨝k)
+-- 5) Personas (todos los datos) que han actuado y/o dirigido en las mismas Películas en las que actuó Keanu Reeves
+-- act = ρact (πtitulo σnom='Keanu Reeves' Actua)
+-- a = Actua⨝act
+-- b = Dirige⨝act
+-- (πnom (a∪b)) ⨝ Persona
+-- 6) Personas (nombre) que han actuado en las películas The Matrix y The Matrix Revolutions.
+-- a = ρa (Actua)
+-- πa.nom σActua.nom=a.nom and Actua.titulo='The Matrix' and a.titulo='The Matrix Revolutions' (Actua ⨯ a)
+-- 7) Personas (nombre) que únicamente han actuado en la película The Matrix Revolutions.
+-- ma = ρma (πnom σtitulo≠'The Matrix Revolutions' Actua)
+-- πnom Actua - ma
