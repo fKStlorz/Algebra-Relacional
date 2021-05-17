@@ -14,7 +14,7 @@
 -- act = ρact (πtitulo σnom='Keanu Reeves' Actua)
 -- a = Actua⨝act
 -- b = Dirige⨝act
--- (πnom (a∪b)) ⨝ Persona
+-- σnom≠'Keanu Reeves' ((πnom (a∪b)) ⨝ Persona)
 -- 6) Personas (nombre) que han actuado en las películas The Matrix y The Matrix Revolutions.
 -- a = ρa (Actua)
 -- πa.nom σActua.nom=a.nom and Actua.titulo='The Matrix' and a.titulo='The Matrix Revolutions' (Actua ⨯ a)
