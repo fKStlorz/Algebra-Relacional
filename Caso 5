@@ -7,6 +7,8 @@
 -- prod = ρprod (Producto)
 -- (π prod.num (prod ⨝ prod.num=Producto.num and prod.nombre='Pizza napolitana' and Producto.nombre='Pizza napolitana especial' Producto)) ⨝ Sucursal
 -- 4) Productos (nombre y stock) comercializados en las provincias de Cuyo (San Juan, Mendoza y San Luis).
+-- provincias = ρprovincias (π provincia (σ provincia='San Juan' or provincia='San Luis' or provincia='Mendoza' Sucursal))
+-- πnombre, stock (((πcod, provincia (Producto⨝Sucursal)) ÷ provincias) ⨝ Producto)
 -- 5) Provincias que no venden Pizza muzzarella.
 -- venden = ρvenden (π provincia (Sucursal⨝(σ nombre='Pizza muzzarella' Producto)))
 -- (π provincia (Sucursal⨝Producto)) - venden
@@ -14,4 +16,5 @@
 -- venden = ρvenden (πnum (Sucursal⨝(σ nombre='Pizza con jamón' Producto)))
 -- (π num (Sucursal⨝Producto)) - venden
 -- 7) Nombre de productos vendidos por todas las sucursales de San Juan.
--- πnombre (σprovincia='San Juan' (Producto ⨝ Sucursal))
+-- sucu = ρsucu (πnum (σprovincia='San Juan' Sucursal))
+-- ((π cod,num Producto) ÷ sucu)
