@@ -9,3 +9,8 @@
 -- 3) Planetas (nombre, cantidad de años luz) junto al/a los Astrónomo/s (nombre) que lo descubrieron.
 -- πnomp, cantal, nomas (D⨝Pla)
 -- 4) Astrónomos de la universidad de Antioquía que descubrieron tanto planetas como satélites.
+-- pl = ρpl πnomas σuni='Universidad de Antioquía' (D⨝As)
+-- sa = ρsa πnomas σuni='Universidad de Antioquía' (S⨝As)
+-- pl∩sa
+-- 5) Planetas (nombre y fecha de descubrimiento) que no tienen satélites.
+-- πnomp,fechadesc (((πnomp Pla) - (πplaneta S))⨝Pla)
