@@ -1,6 +1,13 @@
 -- 1) Personas (todos los datos) que solamente han tomado la línea 26A de la provincia de San Juan.
 -- sj = ρsj (π num (σ prov='San Juan' Tar))
 -- (πnum (sj⨝V)) - (πnum σ codlinea≠'26A' V)
+
+-- Alternativa
+sj = ρsj (π cuit (σ prov≠'San Juan' Emp))
+lin = ρlin (πnum σcodlinea≠'26A' V)
+r1 = ρr1 (πnum (V⨝ empresa=cuit sj))
+(((πnum V) - r1) - lin)⨝Tar
+
 -- 2) Empresas (todos los datos) en las que viajaron personas oriundas de la provincia de San Juan y San Luis.
 -- sj = ρsj (π num (σ prov='San Juan' Tar))
 -- sl = ρsl (π num (σ prov='San Luis' Tar))
