@@ -1,13 +1,12 @@
 -- 1) Personas (todos los datos) que solamente han tomado la línea 26A de la provincia de San Juan.
 -- sj = ρsj (π num (σ prov='San Juan' Tar))
 -- (πnum (sj⨝V)) - (πnum σ codlinea≠'26A' V)
-
--- Alternativa
+/*
 sj = ρsj (π cuit (σ prov≠'San Juan' Emp))
 lin = ρlin (πnum σcodlinea≠'26A' V)
 r1 = ρr1 (πnum (V⨝ empresa=cuit sj))
 (((πnum V) - r1) - lin)⨝Tar
-
+*/
 -- 2) Empresas (todos los datos) en las que viajaron personas oriundas de la provincia de San Juan y San Luis.
 -- sj = ρsj (π num (σ prov='San Juan' Tar))
 -- sl = ρsl (π num (σ prov='San Luis' Tar))
@@ -17,7 +16,7 @@ r1 = ρr1 (πnum (V⨝ empresa=cuit sj))
 -- πnombre,dni ((πd.num (σ d.fecha=V.fecha and d.codlinea=V.codlinea and d.empresa=V.empresa and d.hora≠V.hora (d ⨯ V)))⨝Tar)
 -- 4) Personas que viajaron más de una vez en la línea 17 La positiva, el día 02/03/16.
 -- d = ρd (V)
--- σ d.hora≠V.hora and d.codlinea='17' and V.codlinea='17' and d.fecha= (d x V)
+-- (πd.num (σ d.hora≠V.hora and d.codlinea='17' and V.codlinea='17' and d.fecha=date('2016-03-02') (d x V))) ⨝ Tar
 -- 5) Personas (todos los datos) que viajaron en todas las empresas de la provincia de San Juan (sin importar la línea).
 -- vi = ρvi (πcuit Emp)
 -- (ρ cuit←empresa (πnum, empresa V) ÷ (vi))⨝Tar
