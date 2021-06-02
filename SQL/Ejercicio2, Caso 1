@@ -1,0 +1,214 @@
+/* Caso 1 */
+
+create table Pers (
+dni integer not null constraint pers_pk primary key,
+nom varchar(30) not null,
+sexo varchar(20),
+edad integer,
+dir varchar(30),
+tel integer,
+zona varchar(30)
+);
+
+insert into Pers values
+(35678900,'Juan Perez','M',33,'Libertador 340 (E)','4234560','Capital'),
+(40222333,'María Castro','F',28,'Salta 560(N)','4305060','Capital'),
+(34567890, 'Ariel Gonzalez','M',25,'Mendoza 1780(S)','4209080','Rawson'),
+(33444567, 'Ian Mendez','M',22,'Pringles 457(S)','4221190','Chimbas'),
+(38444567, 'Morena Torrez','F',34,'San Luis 590(E)','4309077','Caucete'),
+(37444567, 'Morena Torrez','F',35,'Córdoba 234(E)','4209027','Rivadavia'),
+(40200400, 'Pedro Torrez','M',24,'Córdoba 234(E)','4209027','Rivadavia'),
+(40500600, 'Camila Páez','F',23,'Las Moreras 3450(N)','4309027','Rivadavia'),
+(41200900, 'Karen García','F',21,'San Lorenzo','4234511','Desamparados'),
+(20498425,'Juan Perez','M',50,'Fray Justo 678(N)','4334455','Capital'),
+(18498425,'Ana García','F',54,'Salta 560(N)','4335566','Capital'),
+(17490495,'Felipe Castro','M',56,'Santiago del Estero 670 (o)','4300096','Ullúm');
+
+create table Depo (
+codd varchar(10) not null constraint depo_pk primary key,
+nomd varchar(30),
+clase varchar(30)
+);
+
+Insert into Depo values
+('D01','Fútbol','Balón'),
+('D02','Básquet','Balón'),
+('D03','Hockey sobre césped','Balón'),
+('D04','Tenis','Balón'),
+('D05','Natación','Atlético'),
+('D06','Kitesurf','Agua'),
+('D10','Boxeo','Combate'),
+('D22','Kick Boxing','Combate'),
+('D30','Trekking','Montaña');
+
+create table Club (
+codc integer not null constraint club_pk primary key,
+nombc varchar(40),
+dir varchar(50),
+tel integer,
+cat varchar(30),
+zona varchar(30)
+);
+
+Insert into Club values
+(100,'Ausonia','Av. José Ignacio de la Roza Oeste 2174','4356090',1,'Rivadavia'),
+(200,'Banco Hispano','Paula Albarracín de Sarmiento Sur','4231860',2,'Capital'),
+(300,'Kayak Club','Ruta Del Sol','4406865',1,'Rivadavia'),
+(400,'Sportivo Desamparados','Echeverría Norte 99','4456723',1,'Desamparados'),
+(500,'Club Julio Mocoroa','Mendoza Norte 585-667','4212687',2,'Rawson'),
+(600,'UVT','Abraham Tapia 1380','4214716',2,'Rawson');
+
+CREATE TABLE Prac
+(
+dni INTEGER NOT NULL,
+codd varchar(10) NOT NULL,
+codc INTEGER NOT NULL,
+primary key(dni,Codd,CodC),
+FOREIGN KEY(dni)references Pers(dni) on delete cascade,
+foreign key(codd) references Depo( codd)on delete cascade,
+foreign key(codc) references Club(codc) on delete cascade
+);
+
+Insert into Prac values
+(35678900,'D01',100),
+(35678900,'D01',200),
+(35678900,'D02',200),
+(40222333,'D01',100),
+(40222333,'D04',200),
+(40222333,'D06',300),
+(40500600,'D05',100),
+(35678900,'D02',100),
+(35678900,'D03',100),
+(35678900,'D05',100),
+(41200900,'D01',100),
+(41200900,'D02',100),
+(41200900,'D04',100),
+(41200900,'D03',100),
+(20498425,'D06',100),
+(20498425,'D06',200),
+(20498425,'D06',300),
+(17490495,'D10',600),
+(17490495,'D22',600),
+(41200900,'D10',100),
+(41200900,'D10',200),
+(41200900,'D10',300),
+(41200900,'D10',400),
+(41200900,'D10',500),
+(41200900,'D10',600),
+(41200900,'D22',100),
+(35678900,'D10',100),
+(35678900,'D22',100),
+(17490495,'D30',300),
+(35678900,'D30',300),
+(35678900,'D06',100);
+
+/* 1. Inserte nuevas Personas (deportista) con los siguientes datos: */
+
+insert into Pers values
+(14895399, 'Perez Edgar', 'M', 35, 'Hipólito Irigoyen 528', '4222935', 'Rawson'),
+(24835599, 'González Rosa', 'F', 50, 'Hipólito Irigoyen 528', '4229115', 'Rivadavia'),
+(34895399, 'Fernández Luis', 'M', 28, 'Hipólito Irigoyen 528', '4293538', 'Santa Lucia'),
+(17895399, 'Ruiz Analia', 'F', 18, 'Hipólito Irigoyen 528', '4258912', 'Pocito');
+
+/* 2. Inserte el nuevo deporte con los siguientes datos: */
+
+insert into Depo values
+('D99', 'Rugby', 'Balón');
+
+/* 3. Inserte el nuevo club con los siguientes datos:  */
+
+insert into Club values
+(99, 'Universidad', '25 de Mayo', '4311425', 1, 'Capital');
+
+/* 4. Inserte la nueva tupla para practica con los siguientes datos:  */
+
+insert into Prac values
+(14895399, 'D99', 99)
+
+/* 5. Actualice el teléfono del Club UVT por el número 4312548.  */
+
+update Club
+set tel='4312548'
+where nombc='UVT';
+
+/* 6. Elimine el Deporte “Tenis”.  */
+
+delete from depo
+where nomd='Tenis';
+
+/* 7. Realice una consulta que obtenga nombre, sexo y edad de todas las personas cuya edad es mayor que el de todas las
+personas que practican deportes en el club Ausonia  */
+
+select nom, sexo, edad
+from pers
+where edad > all (select max(edad)
+				 from pers natural join (select distinct dni
+										from prac natural join club
+										where nombc='Ausonia') aux);
+
+/* 8. Realice una consulta que obtenga un listado que incluya el nombre de los clubes que cuya dirección se encuentre
+en Av. José Ignacio de la Roza */
+
+select nombc
+from club
+where dir like '%Av. José Ignacio de la Roza%';
+
+/* 9. Obtenga el nombre de los clubes donde se practica básquet  */
+
+select nombc
+from club natural join (select distinct codc
+						from depo natural join prac
+						where nomd='Básquet') aux;
+						
+/* 10.Obtenga nombre de los clubes donde se practican deportes en la categoría infantil en básquet, se consideran
+deportes categoría infantil aquellos donde la edad de las personas se encuentra entre 13 y 14 años. */
+
+select distinct codc
+from prac natural join depo natural join pers
+where nomd='Básquet' and edad>=20 and edad<=35;
+						
+/* 11.Obtenga nombre y dirección de las personas que viven en la misma zona que Juan Pérez, DNI 20.498.425. */
+
+select nom,dir
+from pers
+where zona in (select zona
+				from pers
+				where dni='20498425') and dni!='20498425';
+				
+/* 12.Obtenga el nombre de las personas mayores que Ana García (DNI: 18.498.425). */
+
+select nom
+from pers
+where edad > all (select edad
+				 from pers
+				 where dni='18498425');
+				 
+/* 13.Obtenga el nombre de las personas que practican en clubes que están ubicados en la misma zona en la que ellos viven */
+
+select distinct nom
+from pers natural join (select dni
+						from club join (prac natural join pers) aux
+						on club.codc=aux.codc and club.zona=aux.zona) aux2;
+						
+/* 14.Obtenga el nombre de las personas junto al nombre del deporte que práctica. Se deben incluir todas las personas
+registradas más allá que no estén practicando ningún deporte */
+
+select distinct nom, nomd
+from pers left join (select *
+					from depo natural join prac) aux
+on pers.dni=aux.dni;
+
+-- 26.Gestión de usuarios: Crear un usuario (UserDep) y posteriormente cambiarle la contraseña.
+
+create user UserDep
+with password 'userdep1';
+ALTER ROLE userdep WITH PASSWORD 'userdep2';
+
+-- Consultas al catologo
+
+-- 27.Muestre todos los datos de la base de datos deportes (Tabla pg_database del catálogo)
+
+
+
+
+
